@@ -2,36 +2,37 @@
 
 using namespace std;
 
-int SecondLargestElement(int arr[], int n){
-    int largest = 0;
-    int secl = -1;
+int SecondLargestElement(int arr[], int n) {
+    if (n < 2) {
+        // Not enough elements for a second-largest
+        return -1;
+    }
 
-    for(int i = 1; i < n; i++){
-        if(arr[i] > arr[largest]){
-            secl = largest;
-            largest = i;
-        }
-        else if(arr[i] != arr[largest]){
-            if(secl == -1 || arr[i] > arr[secl]){
-                secl = i;
+    int largest = 0;    // Index of the largest element
+    int secondLargest = -1; // Index of the second-largest element
+
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > arr[largest]) {
+            secondLargest = largest; // Update second largest
+            largest = i;             // Update largest
+        } else if (arr[i] != arr[largest]) {
+            if (secondLargest == -1 || arr[i] > arr[secondLargest]) {
+                secondLargest = i; // Update second largest
             }
         }
     }
 
-    return secl;
+    return secondLargest;
 }
 
 int main(){
 
-    int n = 5;
+    int n = 3;
     int arr[n];
 
-    arr[0] = 10001;
-    arr[1] = 1000;
-    arr[2] = 1000;
-    arr[3] = 1000;
-    arr[4] = 1000;
-
+    arr[0] = 10;
+    arr[1] = 10;
+    arr[2] = 10;
     int secl = SecondLargestElement(arr, n);
     if(secl == -1){
         cout<<"Second Largest Element element not found";
